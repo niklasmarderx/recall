@@ -27,10 +27,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Format
         run: cargo fmt --all -- --check
-        continue-on-error: true
       - name: Clippy
-        run: cargo clippy --all-targets
-        continue-on-error: true
+        run: cargo clippy --all-targets -- -D warnings
       - name: Test
         run: cargo test --all
       - name: Build (release)
