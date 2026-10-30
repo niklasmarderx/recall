@@ -62,7 +62,10 @@ fn handle(store: &Store, request: &Value) -> Option<Value> {
 fn handle_tool_call(store: &Store, id: Option<Value>, request: &Value) -> Value {
     let params = request.get("params").cloned().unwrap_or(Value::Null);
     let name = params.get("name").and_then(Value::as_str).unwrap_or("");
-    let args = params.get("arguments").cloned().unwrap_or_else(|| json!({}));
+    let args = params
+        .get("arguments")
+        .cloned()
+        .unwrap_or_else(|| json!({}));
 
     let outcome: Result<String> = match name {
         "memory_add" => {

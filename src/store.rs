@@ -167,7 +167,11 @@ mod tests {
     fn add_search_and_list() {
         let store = Store::open_in_memory().unwrap();
         store
-            .add("Niklas prefers Rust for systems programming", "pref", "test")
+            .add(
+                "Niklas prefers Rust for systems programming",
+                "pref",
+                "test",
+            )
             .unwrap();
         store
             .add("The deploy runs every Monday at 9am", "ops", "test")
