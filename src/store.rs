@@ -119,8 +119,8 @@ impl Store {
         }
         let mut stmt = self.conn.prepare(
             "SELECT m.id, m.content, m.tags, m.source, m.created_at \
-             FROM memories_fts f JOIN memories m ON m.id = f.rowid \
-             WHERE f MATCH ?1 ORDER BY bm25(f) LIMIT ?2",
+             FROM memories_fts JOIN memories m ON m.id = memories_fts.rowid \
+             WHERE memories_fts MATCH ?1 ORDER BY bm25(memories_fts) LIMIT ?2",
         )?;
         let rows = stmt.query_map(params![fts, limit as i64], Self::row_to_memory)?;
         let mut out = Vec::new();
